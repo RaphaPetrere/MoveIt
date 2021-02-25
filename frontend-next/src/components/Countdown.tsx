@@ -3,10 +3,9 @@ import { ChallengesContext } from '../contexts/ChallengesContext';
 import styles from '../styles/components/Countdown.module.css';
 
 export function Countdown() {
-    const { startNewChallenge } = useContext(ChallengesContext);
+    const { startNewChallenge, resetChallenge, activeChallenge } = useContext(ChallengesContext);
 
     const [time, setTime] = useState(0.1 * 60);
-    const [isActive, setIsActive] = useState(false);
     const [hasFinished, setHasFinished] = useState(false);
 
     const minutes = Math.floor(time / 60);
@@ -15,12 +14,8 @@ export function Countdown() {
     const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('');
     const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('');
 
-    function toggleCountdown(status) {
-        setIsActive(status);
-    }
-
     useEffect(() => {
-        if(isActive && time > 0)
+        if(activeChallenge && time > 0)
         {
             setTimeout(() => {
                 setTime(time - 1);
@@ -28,19 +23,22 @@ export function Countdown() {
         }
         else
         {
-            if(!isActive && time > 0)
+            if(!activeChallenge && time > 0)
             {
                 setTime(0.1 * 60);
             }
-            else if (isActive && time == 0)
+            else if (activeChallenge && time == 0)
             {
                 setHasFinished(true);
-                setIsActive(false);
-                startNewChallenge();
+            }
+            else
+            {
+                setHasFinished(false);
+                setTime(0.1 * 60);
             }
         } 
             
-    }, [isActive, time]);
+    }, [activeChallenge, time]);
 
     return (
         <div>
@@ -56,7 +54,7 @@ export function Countdown() {
                 </div>
             </div>
 
-            { hasFinished ? (
+            { (activeChallenge && hasFinished) ? (
                 <button 
                     disabled
                     className={styles.countdownButton}
@@ -67,12 +65,12 @@ export function Countdown() {
             :
             (
                 <>
-                {isActive ? 
+                {activeChallenge ? 
                     (
                         <button 
                             type="button" 
                             className={`${styles.countdownButton} ${styles.countdownButtonActive}`} 
-                            onClick={() => toggleCountdown(false)}
+                            onClick={resetChallenge}
                         >
                             Abandonar ciclo
                         </button>
@@ -82,7 +80,7 @@ export function Countdown() {
                         <button 
                             type="button" 
                             className={styles.countdownButton} 
-                            onClick={() => toggleCountdown(true)}
+                            onClick={startNewChallenge}
                         >
                             Iniciar um ciclo
                         </button>
