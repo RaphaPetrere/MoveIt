@@ -1,0 +1,30 @@
+.sidebarContainer {
+    width: 8%;
+    background: var(--white);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.logo {
+    height: 48px;
+    width: 48px;
+}
+
+.linkContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.linkContainer a {
+    text-align: center;
+    border-left: 5px solid var(--blue-dark);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
