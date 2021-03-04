@@ -2,17 +2,22 @@ import { useContext } from 'react';
 import { ChallengesContext } from '../contexts/ChallengesContext';
 import styles from '../styles/components/Profile.module.css';
 
-export function Profile() {
+interface ProfileStanding {
+    username: string;
+    level: number;
+}
+
+export function Profile(props: ProfileStanding) {
     const { level } = useContext(ChallengesContext);
     
     return (
         <div className={styles.profileContainer}>
-            <img src="https://github.com/stephYatate.png" alt="Raphael Petrere"/>
+            <img src="https://github.com/stephYatate.png" alt={props.username}/>
             <div>
-                <strong>Raphael Petrére</strong>
+                <strong>{props.username}</strong>
                 <p>
                     <img src="icons/level.svg" alt="Level"/>
-                    Level {level}
+                    Level {props.level}
                 </p>
             </div>
         </div>

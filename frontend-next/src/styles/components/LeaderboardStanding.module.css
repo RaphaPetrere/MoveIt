@@ -1,0 +1,27 @@
+.standingContainer {
+    background: var(--white);
+    padding: 2rem;
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: 5fr 2fr 2fr;
+    gap: 6.25rem;
+    align-content: center;
+
+    border-radius: 5px;
+}
+
+.standingContainer>div>img {
+    width: 4rem !important;
+    height: 4rem !important;
+}
+
+.stats {
+    font-size: 1rem;
+    font-weight: 500;
+    align-self: center;
+}
+
+.stats strong {
+    color: var(--blue);
+}

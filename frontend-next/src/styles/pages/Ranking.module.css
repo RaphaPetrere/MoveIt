@@ -1,0 +1,54 @@
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.rankingContainer {
+    height: 100vh;
+    width: 992px;
+    max-width: 992px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--title);
+    margin-bottom: 3rem;
+}
+
+.description {
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: 1fr 4fr 2fr 2fr;
+    gap: 5rem;
+    align-content: center;
+
+    margin-bottom: 2rem;
+}
+
+.description h5 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: .5;
+}
+
+.leaderboard {
+    display: grid;
+    grid-template-columns: 1fr 9fr;
+    gap: .5rem;
+}
+
+.rank {
+    padding: 3rem;
+    font-size: 24px;
+    font-weight: 500;
+    background: var(--white);
+    border-radius: 5px;
+}

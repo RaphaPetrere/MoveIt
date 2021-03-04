@@ -30,7 +30,7 @@ export default function Home(props: HomeProps) {
     >
       {props.userLoggedOn == true ?
         <div className={styles.container}>
-          <Sidebar />
+          <Sidebar page="home"/>
           <div className={styles.homeContainer}>
             <Head>
               <title>Início | move.it</title>
@@ -40,7 +40,7 @@ export default function Home(props: HomeProps) {
 
             <section>
               <div>
-                <Profile />
+                <Profile username="Raphael Cardoso Petrére" level={props.level} />
                 <CompletedChallenges />
                 <Countdown />
               </div>
