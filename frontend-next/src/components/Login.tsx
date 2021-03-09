@@ -52,11 +52,13 @@ export function Login() {
                 <img src="icons/github.png" alt="Github"/>
                 <p className={styles.description}>Faça login com seu GitHub <br/>para começar</p>
             </div>
-            <input type="text" className={styles.username} placeholder="Digite seu username" onChange={handleUsername} />
-            <button className={styles.submitLogin} onClick={() => setIsValidated(true)}>
-                <img src="icons/right-arrow.svg" alt="Enviar"/>
-            </button>
-            {showMessage && <p className={styles.errorMessage}>Usuário invalido! Verifique se informou o usuário certo.</p>}
+            <div className={styles.inputDiv}>
+                <input type="text" className={styles.username} placeholder="Digite seu username" onChange={handleUsername} />
+                <button className={styles.submitLogin} onClick={() => setIsValidated(true)}>
+                    <img src="icons/right-arrow.svg" alt="Enviar"/>
+                </button>
+                {showMessage && <p className={styles.errorMessage}>Usuário invalido! Verifique se informou o usuário certo.</p>}
+            </div>
         </div>
     );
 }

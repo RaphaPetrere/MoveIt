@@ -17,7 +17,9 @@ export function Profile(props: ProfileStanding) {
                 <strong>{props.username}</strong>
                 <p>
                     <img src="icons/level.svg" alt="Level"/>
-                    Level {level}
+                    <span>
+                        Level {level}
+                    </span>
                 </p>
             </div>
         </div>

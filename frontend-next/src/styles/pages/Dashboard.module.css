@@ -21,3 +21,31 @@
     gap: 6.25rem;
     align-content: center;
 }
+
+@media screen and (max-width: 1000px)
+{
+    .homeContainer section>div {
+        min-width: 100%;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 700px)
+{
+    .homeContainer {
+        max-width: 80%;
+    }
+     
+    .homeContainer section {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow-y: auto;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .homeContainer section::-webkit-scrollbar {
+        display: none; /* Chrome Safari e Opera */
+    }
+}

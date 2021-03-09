@@ -42,7 +42,9 @@ export default function Ranking(props: RankingProps) {
                             {desafiantes.map((desafiante, index) => {
                                 return (
                                     <div className={styles.leaderboardStanding} key={index}>
-                                        <h5 className={styles.rank}>{index+1}</h5>
+                                        <div className={styles.rank}>
+                                            <h5>{index+1}</h5>
+                                        </div>
                                         <LeaderboardStanding 
                                             username={desafiante.username}
                                             level={Number(desafiante.level)}

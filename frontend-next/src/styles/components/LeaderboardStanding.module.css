@@ -25,3 +25,17 @@
 .stats strong {
     color: var(--blue);
 }
+
+@media screen and (max-width: 700px)
+{
+    .standingContainer>div {
+        width: 160px;
+    }
+}
+
+@media screen and (max-width: 1000px)
+{
+    .standingContainer>div {
+        width: 172px;
+    }
+}
