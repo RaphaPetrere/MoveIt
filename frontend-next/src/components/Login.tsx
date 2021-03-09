@@ -1,41 +1,44 @@
 import { useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/router'
 import { ChallengesContext } from '../contexts/ChallengesContext';
 import styles from '../styles/components/Login.module.css';
 
 export function Login() {
-    const { changeUserStatus } = useContext(ChallengesContext);
+    const { changeCurrentPage } = useContext(ChallengesContext);
     const [isValidated, setIsValidated] = useState(false);
     const [showMessage, setShowMessage] = useState(false);
     const [username, setUsername] = useState("");
+    const router = useRouter();
 
-    // useEffect(() => {
-    //     if(isValidated)
-    //     {
-    //         fetch(`https://api.github.com/users/${username}`, {method:'GET', 
-    //         headers: {'Authorization': 'Basic ' + btoa('login:password')}})
-    //             .then(res => res.json())
-    //             .then(
-    //                 (result) => {
-    //                     console.log("Result", result);
-    //                     if(!result.id)
-    //                     {
-    //                         setShowMessage(true); 
-    //                         setIsValidated(false);
-    //                     }
-    //                     else
-    //                     {
-    //                         setIsValidated(true);
-    //                         setShowMessage(false); 
-    //                     }
-    //                 },
-    //                 (error) => {
-    //                     console.log("Error", error);
-    //                     setShowMessage(true);
-    //                     setIsValidated(false);
-    //                 }
-    //             )
-    //     }
-    // }, [isValidated]);
+    useEffect(() => {
+        if(isValidated)
+        {
+            fetch(`https://api.github.com/users/${username}`, {method:'GET', 
+            headers: {'Authorization': 'Basic ' + btoa('login:password')}})
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                        console.log("Result", result);
+                        if(!result.id)
+                        {
+                            setShowMessage(true); 
+                            setIsValidated(false);
+                        }
+                        else
+                        {
+                            changeCurrentPage('challenges');
+                            router.push('/dashboard');
+
+                        }
+                    },
+                    (error) => {
+                        console.log("Error", error);
+                        setShowMessage(true);
+                        setIsValidated(false);
+                    }
+                )
+        }
+    }, [isValidated]);
 
     function handleUsername (e) {
         setUsername(e.target.value)

@@ -15,13 +15,13 @@ interface ChallengesContextData {
     challengesCompleted: number; 
     experienceToNextLevel: number; 
     activeChallenge: Challenge;
-    userLoggedOn: boolean;
+    currentPage?: string;
     levelUp: () => void;
     startNewChallenge: () => void;
     resetChallenge: () => void;
     finishChallenge: () => void;
     closeLevelUpModal: () => void;
-    changeUserStatus: (status : boolean) => void;
+    changeCurrentPage: (page : string) => void;
 }
 
 interface ChallengesProviderProps {
@@ -29,7 +29,6 @@ interface ChallengesProviderProps {
     level: number,
     currentExperience: number,
     challengesCompleted: number,
-    userLoggedOn: boolean,
 }
 
 export const ChallengesContext = createContext({} as ChallengesContextData);
@@ -38,7 +37,7 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
     const [level, setLevel] = useState(rest.level ?? 1);
     const [currentExperience, setCurrentExperience] = useState(rest.currentExperience ?? 0);
     const [challengesCompleted, setChallengesCompleted] = useState(rest.challengesCompleted ?? 0);
-    const [userLoggedOn, setUserLoggedOn] = useState(rest.userLoggedOn ?? false);
+    const [currentPage, setCurrentPage] = useState("");
 
     const [activeChallenge, setActiveChallenge] = useState(null);
     const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
@@ -51,10 +50,9 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
 
     useEffect(() => {
         Cookies.set('level', String(level));
-        Cookies.set('userLoggedOn', String(userLoggedOn));
         Cookies.set('currentExperience', String(currentExperience));
         Cookies.set('challengesCompleted', String(challengesCompleted));
-    }, [level, userLoggedOn, currentExperience, challengesCompleted]);
+    }, [level, currentExperience, challengesCompleted]);
 
     function levelUp() {
         setLevel(level + 1);
@@ -101,8 +99,8 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
         resetChallenge();
     }
 
-    function changeUserStatus(status) {
-        setUserLoggedOn(status);
+    function changeCurrentPage(page) {
+        setCurrentPage(page);
     }
 
     return (
@@ -113,13 +111,13 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
                 challengesCompleted, 
                 activeChallenge,
                 experienceToNextLevel,
-                userLoggedOn,
+                currentPage,
                 levelUp,
                 startNewChallenge,
                 resetChallenge,
                 finishChallenge,
                 closeLevelUpModal,
-                changeUserStatus,
+                changeCurrentPage,
             }}
         >
             {children}

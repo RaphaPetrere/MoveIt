@@ -1,31 +1,31 @@
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
 import { ChallengesProvider } from '../contexts/ChallengesContext';
 
 import styles from '../styles/pages/Ranking.module.css';
+
 import { Sidebar } from '../components/Siderbar';
 import { LeaderboardStanding } from '../components/LeaderboardStanding';
-
 import desafiantes from '../../desafiantes.json';
 
 interface RankingProps {
-  level: number,
-  currentExperience: number,
-  challengesCompleted: number,
-  userLoggedOn: boolean,
-};
+    level: number,
+    currentExperience: number,
+    challengesCompleted: number,
+  };
 
 export default function Ranking(props: RankingProps) {
-    console.log(desafiantes);
     return (
+        
         <ChallengesProvider 
             level={props.level} 
             currentExperience={props.currentExperience} 
             challengesCompleted={props.challengesCompleted}
-            userLoggedOn={props.userLoggedOn}
         >
             <div className={styles.container}>
                 <Sidebar page="ranking"/>
+
                 <div className={styles.rankingContainer}>
                     <Head>
                         <title>Ranking | move.it</title>
@@ -38,10 +38,10 @@ export default function Ranking(props: RankingProps) {
                             <h5>Desafios</h5>
                             <h5>Experiência</h5>
                         </div>
-                        {desafiantes.map((desafiante) => {
+                        {desafiantes.map((desafiante, index) => {
                             return (
-                                <div className={styles.leaderboard}>
-                                    <h5 className={styles.rank}>1</h5>
+                                <div className={styles.leaderboard} key={index}>
+                                    <h5 className={styles.rank}>{index+1}</h5>
                                     <LeaderboardStanding 
                                         username={desafiante.username}
                                         level={Number(desafiante.level)}
@@ -57,3 +57,16 @@ export default function Ranking(props: RankingProps) {
         </ChallengesProvider>
     );
 }
+
+//Tudo feito aqui é executado no Node do Next, não no layout
+export const getServerSideProps: GetServerSideProps = async (ctx) => { //Essa função manipula quais dados são passados da camada Next pro client
+    const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
+    
+    return {
+      props: {    
+        level: Number(level),
+        currentExperience: Number(currentExperience),
+        challengesCompleted: Number(challengesCompleted),
+      }
+    }
+};

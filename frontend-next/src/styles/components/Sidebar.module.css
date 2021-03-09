@@ -22,29 +22,28 @@
     width: 100%;
 }
 
-.linkContainer a {
+.linkContainer button {
     text-align: center;
     height: 72px;
     position: relative;
     overflow: hidden;
+    background: var(--white);
+    border: none;
 }
 
-.linkContainer a::after{
+.linkContainer button::after{
     content: "";
     height: 100%;
     background: var(--blue-dark);
     width: 15px;
     position: absolute;
+    top: 0px;
     left: -10px;
     border-radius: 15px;
     transition: all .35s;
     opacity: 0;
 }
 
-.linkContainer a:hover::after{
+.linkContainer button:hover::after{
     opacity: 1;
-}
-
-.linkContainer a img {
-    margin-top: 18px;
 }
