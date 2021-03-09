@@ -14,6 +14,10 @@
     flex-direction: column;
 }
 
+.rankingContainer section {
+    height: 100%;
+}
+
 .title {
     font-size: 36px;
     font-weight: 600;
@@ -40,9 +44,15 @@
 }
 
 .leaderboard {
+    overflow-y: auto;
+    height: 75%;
+}
+
+.leaderboardStanding {
     display: grid;
     grid-template-columns: 1fr 9fr;
     gap: .5rem;
+    margin-bottom: 1rem;
 }
 
 .rank {

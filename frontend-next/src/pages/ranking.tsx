@@ -38,19 +38,21 @@ export default function Ranking(props: RankingProps) {
                             <h5>Desafios</h5>
                             <h5>Experiência</h5>
                         </div>
-                        {desafiantes.map((desafiante, index) => {
-                            return (
-                                <div className={styles.leaderboard} key={index}>
-                                    <h5 className={styles.rank}>{index+1}</h5>
-                                    <LeaderboardStanding 
-                                        username={desafiante.username}
-                                        level={Number(desafiante.level)}
-                                        challenges={Number(desafiante.challenges)}
-                                        experience={Number(desafiante.experience)}
-                                    />
-                                </div>
-                            )
-                        }) }
+                        <div className={styles.leaderboard}>
+                            {desafiantes.map((desafiante, index) => {
+                                return (
+                                    <div className={styles.leaderboardStanding} key={index}>
+                                        <h5 className={styles.rank}>{index+1}</h5>
+                                        <LeaderboardStanding 
+                                            username={desafiante.username}
+                                            level={Number(desafiante.level)}
+                                            challenges={Number(desafiante.challenges)}
+                                            experience={Number(desafiante.experience)}
+                                        />
+                                    </div>
+                                )
+                            }) }
+                        </div>
                     </section>
                 </div>
             </div>
